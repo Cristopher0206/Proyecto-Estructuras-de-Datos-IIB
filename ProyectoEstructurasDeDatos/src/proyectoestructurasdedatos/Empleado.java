@@ -5,25 +5,34 @@
  */
 package proyectoestructurasdedatos;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  *
  * @author santiago
  */
 public class Empleado {
     private String codigo;
-    private final String nombres;
-    private final String apellidos;
+    private String nombres;
+    private String apellidos;
+    private String cargo;
     private String direccion;
     private String correo;
     private String numTelf;
     
-    public Empleado(String codigo, String nombres, String apellidos, String direccion, String correo, String numTelf){
+    public Empleado(String codigo, String nombres, String apellidos, String cargo, String direccion, String correo, String numTelf){
         this.codigo = codigo;
         this.nombres = nombres;
         this.apellidos = apellidos;
+        this.cargo = cargo;
         this.direccion = direccion;
         this.correo = correo;
         this.numTelf = numTelf;
+    }
+
+    public Empleado() {
+        
     }
 
     public String getCodigo() {
@@ -40,6 +49,14 @@ public class Empleado {
 
     public String getApellidos() {
         return apellidos;
+    }
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
     }
 
     public String getDireccion() {
@@ -67,15 +84,41 @@ public class Empleado {
     }
     
     public static boolean esCodigoValido(String codigo) {
-        return codigo.matches("[1-5][0-4]\\-([0-9]{4})");
+        return codigo.matches("[GG|VD|CT|EB]\\-([0-9]{5})");
     }
 
 
-    // Método para cambiar el segundo dígito del código cuando haya cambio
-    // de sucursal
+    public int generarDigitos(){
+        return (int)(100000 * Math.random());
+    }
     
-    public void cambiarCodigoSucursal(String num){
-        
+    public boolean esNombreValido(String nombre){
+        Pattern p = Pattern.compile("^[a-zA-Z\\s]{1,254}");// puede ser una letra o 254 digitos
+        Matcher m = p.matcher(nombre);
+        return m.matches();
+    }
+    
+    public boolean esApellidoValido(String apellido){
+        Pattern p = Pattern.compile("^[a-zA-Z\\s]{1,254}");// puede ser una letra o 254 digitos
+        Matcher m = p.matcher(apellido);
+        return m.matches();
+    }
+    
+    public boolean esDireccionValido(String direccion){
+        Pattern p = Pattern.compile("^[a-zA-Z\\s]{1,254}");// puede ser una letra o 254 digitos
+        Matcher m = p.matcher(direccion);
+        return m.matches();
+    }
+    
+    public boolean esCorreoValido(String correo) {
+        Pattern p = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher m = p.matcher(correo);
+        return m.matches();
+    }
+    public boolean esTelefonoValido(String telefono) {
+        Pattern p = Pattern.compile("(^[09|08])[0-9]{9}");// valida el 09 o 08 mas 9 digitos de 0 al 9
+        Matcher m = p.matcher(telefono);
+        return m.matches();
     }
 
     @Override

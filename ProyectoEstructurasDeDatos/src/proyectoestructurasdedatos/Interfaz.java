@@ -5,6 +5,10 @@
  */
 package proyectoestructurasdedatos;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author santiago
@@ -79,6 +83,8 @@ public class Interfaz extends javax.swing.JFrame {
         btnInsertarEmpleado = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txaEmpleado = new javax.swing.JTextArea();
+        cmbCargo = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -100,15 +106,45 @@ public class Interfaz extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblNombres.setText("Nombres");
+        lblNombres.setText("Nombre");
 
-        lblApellidos.setText("Apellidos");
+        lblApellidos.setText("Apellido");
+
+        txtNombres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombresKeyPressed(evt);
+            }
+        });
 
         jLabel1.setText("Correo electrónico");
 
         jLabel2.setText("Dirección");
 
         jLabel3.setText("Número de teléfeno");
+
+        txtApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtApellidosKeyPressed(evt);
+            }
+        });
+
+        txtDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDireccionKeyPressed(evt);
+            }
+        });
+
+        txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCorreoKeyPressed(evt);
+            }
+        });
+
+        txtNumTelf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNumTelfKeyPressed(evt);
+            }
+        });
 
         btnInsertarEmpleado.setText("Registrar");
         btnInsertarEmpleado.addActionListener(new java.awt.event.ActionListener() {
@@ -120,6 +156,10 @@ public class Interfaz extends javax.swing.JFrame {
         txaEmpleado.setColumns(20);
         txaEmpleado.setRows(5);
         jScrollPane1.setViewportView(txaEmpleado);
+
+        cmbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vendedor", "Contador", "Encargado de Bodega" }));
+
+        jLabel6.setText("Cargo");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -135,10 +175,6 @@ public class Interfaz extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblApellidos)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtApellidos))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtDireccion))
@@ -149,12 +185,20 @@ public class Interfaz extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNumTelf))))
+                                .addComponent(txtNumTelf))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblApellidos)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbCargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtApellidos)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(99, 99, 99)
                         .addComponent(btnInsertarEmpleado)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -163,7 +207,7 @@ public class Interfaz extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -173,6 +217,10 @@ public class Interfaz extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblApellidos)
                             .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -343,12 +391,52 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void btnInsertarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarEmpleadoActionPerformed
         // TODO add your handling code here:
-        String numSucursal = "2";
-        String numFinal = "0035";
-        String tipo = "1";
+        Empleado emp = new Empleado();
+        String cargo = String.valueOf(cmbCargo.getSelectedItem()); 
+        String codigo = "";
+        switch(cargo){
+            case "Vendedor":
+                codigo += "VD";
+                codigo += "-";
+                codigo += emp.generarDigitos();
+                while (empleado.enlace != null && codigo.equals(empleado.codigo)){
+                    codigo = "VD";
+                    codigo += "-";
+                    codigo += emp.generarDigitos();
+                    empleado = empleado.enlace;
+                }
+                
+                break;
+            case "Contador":
+                codigo += "CT";
+                codigo += "-";
+                codigo += emp.generarDigitos();
+                while (empleado.enlace != null && codigo.equals(empleado.codigo)){
+                    codigo = "CT";
+                    codigo += "-";
+                    codigo += emp.generarDigitos();
+                    empleado = empleado.enlace;
+                }
+                break;
+            case "Encargado de Bodega":
+                codigo += "EB";
+                codigo += "-";
+                codigo += emp.generarDigitos();
+                while (empleado.enlace != null && codigo.equals(empleado.codigo)){
+                    codigo = "EB";
+                    codigo += "-";
+                    codigo += emp.generarDigitos();
+                    empleado = empleado.enlace;
+                }
+                break;
+        }
         
-        String codigo = tipo+numSucursal+"-"+numFinal;
-        Empleado nuevoEmpleado = new Empleado(codigo,txtNombres.getText(),txtApellidos.getText(),txtDireccion.getText(),txtCorreo.getText(),txtNumTelf.getText());
+        String direccion = txtDireccion.getText();
+        
+        
+        
+        
+        Empleado nuevoEmpleado = new Empleado(codigo,txtNombres.getText(),txtApellidos.getText(),cargo,direccion,correo,txtNumTelf.getText());
         
         txaEmpleado.setText(nuevoEmpleado.toString());
     }//GEN-LAST:event_btnInsertarEmpleadoActionPerformed
@@ -439,6 +527,69 @@ public class Interfaz extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnMostrarEmpleadosActionPerformed
 
+    private void txtCorreoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyPressed
+        // TODO add your handling code here:
+        Empleado emp = new Empleado();
+        String correo = txtCorreo.getText();
+        if(!emp.esCorreoValido(correo)){
+            JOptionPane.showMessageDialog(null, "Correo inválido, vuelva a ingresarlo");
+            txtCorreo.setText("");
+            txtCorreo.requestFocus();
+        }else{
+            txtNumTelf.requestFocus();
+        }
+    }//GEN-LAST:event_txtCorreoKeyPressed
+
+    private void txtNumTelfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumTelfKeyPressed
+        // TODO add your handling code here:
+        Empleado emp = new Empleado();
+        String numTelf = txtNumTelf.getText();
+        if(!emp.esTelefonoValido(numTelf)){
+            JOptionPane.showMessageDialog(null, "Número de teléfono inválido, vuelva a ingresarlo");
+            txtNumTelf.setText("");
+            txtNumTelf.requestFocus();
+        }
+    }//GEN-LAST:event_txtNumTelfKeyPressed
+
+    private void txtNombresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresKeyPressed
+        // TODO add your handling code here:
+        Empleado emp = new Empleado();
+        String nombre = txtNombres.getText();
+        if(!emp.esNombreValido(nombre)){
+            JOptionPane.showMessageDialog(null, "Su nombre no puede contener números ni caracteres especiales");
+            txtNombres.setText("");
+            txtNombres.requestFocus();
+        }else{
+            txtApellidos.requestFocus();
+        }
+    }//GEN-LAST:event_txtNombresKeyPressed
+
+    private void txtApellidosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosKeyPressed
+        // TODO add your handling code here:
+        Empleado emp = new Empleado();
+        String apellido = txtApellidos.getText();
+        if(!emp.esApellidoValido(apellido)){
+            JOptionPane.showMessageDialog(null, "Su apellido no puede contener números ni caracteres especiales");
+            txtApellidos.setText("");
+            txtApellidos.requestFocus();
+        }else{
+            cmbCargo.requestFocus();
+        }
+    }//GEN-LAST:event_txtApellidosKeyPressed
+
+    private void txtDireccionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyPressed
+        // TODO add your handling code here:
+        Empleado emp = new Empleado();
+        String direccion = txtDireccion.getText();
+        if(!emp.esApellidoValido(direccion)){
+            JOptionPane.showMessageDialog(null, "Su direccion no puede contener números ni caracteres especiales");
+            txtDireccion.setText("");
+            txtDireccion.requestFocus();
+        }else{
+            txtCorreo.requestFocus();
+        }
+    }//GEN-LAST:event_txtDireccionKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -473,17 +624,22 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInsertarEmpleado;
     private javax.swing.JButton btnMostrarEmpleados;
     private javax.swing.JButton btnRotar;
     private javax.swing.JComboBox<String> cbxSucursales;
+    private javax.swing.JComboBox<String> cmbCargo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
