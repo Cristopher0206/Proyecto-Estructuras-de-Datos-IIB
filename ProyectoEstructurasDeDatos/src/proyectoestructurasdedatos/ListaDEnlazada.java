@@ -5,34 +5,34 @@ package proyectoestructurasdedatos;
  * @author User
  */
 public class ListaDEnlazada {
-    
-    private static class ListNode {
-        private int info;
-        private ListNode siguiente;
-        private ListNode anterior;
+    private Empleado info; // Utilizar otro constructor.
+    private ListaDEnlazada siguiente;
+    private ListaDEnlazada anterior;
+   
+        
 
-         public ListNode (int data){
-            this.anterior = null;  
-            this.info = data;
-            this.siguiente = null;
-        }
+    public ListaDEnlazada (Empleado empleado){
+        this.anterior = null;  
+        this.info = empleado;
+        this.siguiente = null;
     }
     
-    public static void mostrar(ListNode head){
+    
+    public void mostrar(ListaDEnlazada head){
         if (head == null){
             return;
         }
         System.out.print(null + " <--- ");
-        ListNode current = head;
-        while (current.siguiente !=null){
-            System.out.print(current.info + " <---> ");
-            current= current.siguiente;
+        ListaDEnlazada actual = head;
+        while (actual.siguiente !=null){
+            System.out.print(actual.info + " <---> ");
+            actual= actual.siguiente;
         }
-        System.out.println(current.info + " ---> " + null);
+        System.out.println(actual.info + " ---> " + null);
     }
     
-    public static ListNode insertarAlInicio(ListNode head, int data) {
-        ListNode newNode = new ListNode(data);
+    public ListaDEnlazada insertarAlInicio(ListaDEnlazada head, Empleado empleado) {
+        ListaDEnlazada newNode = new ListaDEnlazada(empleado);
         if (head ==null){
             return newNode;
         }  
@@ -42,24 +42,24 @@ public class ListaDEnlazada {
         return head;
     }
     
-    public static ListNode insertarOrdenado(ListNode head, int objeto){
-        ListNode temp;
-        ListNode insertObject = new ListNode(objeto);
+    public ListaDEnlazada insertarOrdenado(ListaDEnlazada head, Empleado empleado){
+        ListaDEnlazada temp;
+        ListaDEnlazada insertObject = new ListaDEnlazada(empleado);
         if (head ==null){
             return insertObject;
         }
         
-        if(objeto < head.info){
+        if(empleado.getCodigo().compareTo(head.info.getCodigo()) < 0){
             temp = head;
             temp.siguiente = head.siguiente;
             head = insertObject;
             temp.anterior = insertObject;
             insertObject.siguiente = temp;
         } else {
-            ListNode current = head;
+            ListaDEnlazada current = head;
             while (current.siguiente != null ) {
                 current = current.siguiente;
-                if(current.siguiente.info > objeto){
+                if(current.siguiente.info.getCodigo().compareTo(empleado.getCodigo()) > 0){
                     temp = current.siguiente;
                     temp.siguiente = current.siguiente.siguiente;
                     current.siguiente = insertObject;

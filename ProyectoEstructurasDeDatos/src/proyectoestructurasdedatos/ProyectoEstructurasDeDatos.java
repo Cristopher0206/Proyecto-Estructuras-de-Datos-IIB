@@ -42,6 +42,7 @@ public class ProyectoEstructurasDeDatos {
         
         sucursal1.mostrarEstructura();
 */
+        /*
         TablaHashEnlazadaEmpleados tabla = new TablaHashEnlazadaEmpleados();
         
         tabla.insertar(1, "10-0001");
@@ -94,7 +95,46 @@ public class ProyectoEstructurasDeDatos {
         
         
         System.out.println("Tabla2: \n"+tabla.mostrarEstructura());
-*/
+*/      
+        
+        String codigo = "VV-0001";
+        String nombres = "Cristopher Santiago";
+        String apellidos = "Pérez Nieto";
+        String cargo = "Vendedor";
+        String direccion = "Pepito Delgado xd";
+        String correo = "cristopher.perez@epn.edu.ec";
+        String numTelf = "0998516975";
+        
+        
+        Empleado emp = new Empleado(codigo, nombres, apellidos, cargo, direccion, correo, numTelf);
+        
+        
+        ListaDEnlazada nuevaLista = new ListaDEnlazada(emp);
+        
+        String codigo2 = "VV-0002";
+        
+        Empleado emp2 = new Empleado(codigo2, nombres, apellidos, cargo, direccion, correo, numTelf);
+        
+        String codigo3 = "VV-0003";
+        
+        Empleado emp3 = new Empleado(codigo3, nombres, apellidos, cargo, direccion, correo, numTelf);
+        
+        String codigo4 = "GG-0000";
+        
+        Empleado emp4 = new Empleado(codigo4, nombres, apellidos, cargo, direccion, correo, numTelf);
+        
+        String codigo5 = "EB-0010";
+        
+        Empleado emp5 = new Empleado(codigo5, nombres, apellidos, cargo, direccion, correo, numTelf);
+        
+        nuevaLista.insertarAlInicio(nuevaLista, emp2);
+        nuevaLista.insertarOrdenado(nuevaLista, emp3);
+        nuevaLista.insertarOrdenado(nuevaLista, emp4);
+        nuevaLista.insertarOrdenado(nuevaLista, emp5);
+        
+        nuevaLista.mostrar(nuevaLista);
+        
+        
     }
     
 }
