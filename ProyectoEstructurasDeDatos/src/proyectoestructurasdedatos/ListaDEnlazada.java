@@ -49,23 +49,23 @@ public class ListaDEnlazada {
             return insertObject;
         }
         
-        if(objeto < head.data){
+        if(objeto < head.info){
             temp = head;
-            temp.next = head.next;
+            temp.siguiente = head.siguiente;
             head = insertObject;
-            temp.previous = insertObject;
-            insertObject.next = temp;
+            temp.anterior = insertObject;
+            insertObject.siguiente = temp;
         } else {
             ListNode current = head;
-            while (current.next != null ) {
-                current = current.next;
-                if(current.next.data > objeto){
-                    temp = current.next;
-                    temp.next = current.next.next;
-                    current.next = insertObject;
-                    insertObject.previous = current;
-                    insertObject.next = temp;
-                    temp.previous = insertObject;
+            while (current.siguiente != null ) {
+                current = current.siguiente;
+                if(current.siguiente.info > objeto){
+                    temp = current.siguiente;
+                    temp.siguiente = current.siguiente.siguiente;
+                    current.siguiente = insertObject;
+                    insertObject.anterior = current;
+                    insertObject.siguiente = temp;
+                    temp.anterior = insertObject;
                     return head;
                 }       
             }
