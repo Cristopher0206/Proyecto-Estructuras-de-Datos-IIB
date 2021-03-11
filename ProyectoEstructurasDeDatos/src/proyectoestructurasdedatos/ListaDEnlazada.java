@@ -1,77 +1,85 @@
-
 package proyectoestructurasdedatos;
+
+import javax.lang.model.SourceVersion;
+
 /**
  *
  * @author User
  */
 public class ListaDEnlazada {
-    private Empleado info; // Utilizar otro constructor.
-    private ListaDEnlazada siguiente;
-    private ListaDEnlazada anterior;
-   
-        
 
-    public ListaDEnlazada (Empleado empleado){
-        this.anterior = null;  
-        this.info = empleado;
-        this.siguiente = null;
+    private NodoEmpleadoLista cabecera; // Este es el nodo inicial de la lista
+
+    public ListaDEnlazada() {
+        this.cabecera = null;
     }
     
-    
-    public void mostrar(ListaDEnlazada head){
-        if (head == null){
-            return;
-        }
-        System.out.print(null + " <--- ");
-        ListaDEnlazada actual = head;
-        while (actual.siguiente !=null){
-            System.out.print(actual.info + " <---> ");
-            actual= actual.siguiente;
-        }
-        System.out.println(actual.info + " ---> " + null);
+
+    public NodoEmpleadoLista getCabecera() {
+        return cabecera;
     }
-    
-    public ListaDEnlazada insertarAlInicio(ListaDEnlazada head, Empleado empleado) {
-        ListaDEnlazada newNode = new ListaDEnlazada(empleado);
-        if (head ==null){
-            return newNode;
-        }  
-        newNode.siguiente = head;
-        head.anterior = newNode;
-        head = newNode;
-        return head;
+
+    public void setCabecera(NodoEmpleadoLista cabecera) {
+        this.cabecera = cabecera;
     }
-    
-    public ListaDEnlazada insertarOrdenado(ListaDEnlazada head, Empleado empleado){
-        ListaDEnlazada temp;
-        ListaDEnlazada insertObject = new ListaDEnlazada(empleado);
-        if (head ==null){
-            return insertObject;
+
+    public String mostrar() {
+        String texto = "";
+        if (this.cabecera == null) {
+            return null;
         }
-        
-        if(empleado.getCodigo().compareTo(head.info.getCodigo()) < 0){
-            temp = head;
-            temp.siguiente = head.siguiente;
-            head = insertObject;
-            temp.anterior = insertObject;
-            insertObject.siguiente = temp;
-        } else {
-            ListaDEnlazada current = head;
-            while (current.siguiente != null ) {
-                current = current.siguiente;
-                if(current.siguiente.info.getCodigo().compareTo(empleado.getCodigo()) > 0){
-                    temp = current.siguiente;
-                    temp.siguiente = current.siguiente.siguiente;
-                    current.siguiente = insertObject;
-                    insertObject.anterior = current;
-                    insertObject.siguiente = temp;
-                    temp.anterior = insertObject;
-                    return head;
-                }       
+        texto += null + " <--- ";
+        NodoEmpleadoLista actual = this.cabecera;
+        while (actual.getAdelante() != null) {
+            texto += actual.getInfo() + " <---> ";
+            actual = actual.getAdelante();
+        }
+        texto += actual.getInfo() + " ---> " + null;
+        return texto;
+    }
+
+    public void insertarOrdenado(Empleado empleado) {
+        NodoEmpleadoLista insertObject = new NodoEmpleadoLista();
+        insertObject.crearNodo(empleado);
+        if (this.cabecera == null) {
+            this.cabecera = insertObject;
+            this.cabecera.setAtras(null);
+            this.cabecera.setAdelante(null);
+        }else{
+            NodoEmpleadoLista temp = this.cabecera;
+            if (empleado.getCodigo().compareTo(temp.getInfo().getCodigo()) < 0) {
+                insertObject.setAdelante(temp);
+                temp.setAtras(insertObject);
+                insertObject.setAtras(null);
+                this.cabecera = insertObject;
+            } else {
+                NodoEmpleadoLista tempIzq = temp;
+                NodoEmpleadoLista tempDer = temp.getAdelante();
+                while (tempIzq.getAdelante() != null) {
+                    if (empleado.getCodigo().compareTo(tempDer.getInfo().getCodigo()) < 0) {
+                        insertObject.setAdelante(tempDer);
+                        insertObject.setAtras(tempIzq);
+                        tempIzq.setAdelante(insertObject);
+                        tempDer.setAtras(insertObject);
+                        break;
+                    } else {
+                        tempIzq = tempIzq.getAdelante();
+                        tempDer = tempDer.getAdelante();
+                    }
+                }
+                if (tempIzq.getAdelante() == null) {
+                    insertObject.setAtras(tempIzq);
+                    tempIzq.setAdelante(insertObject);
+                    insertObject.setAdelante(null);
+                }
+            
             }
         }
-        return head;
     }
+
     
-    
+    public SourceVersion getSupportedSourceVersion() {
+        return SourceVersion.latest();
+    }
+
 }

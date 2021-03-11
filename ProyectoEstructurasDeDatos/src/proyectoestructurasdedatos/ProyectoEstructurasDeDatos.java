@@ -107,9 +107,9 @@ public class ProyectoEstructurasDeDatos {
         
         
         Empleado emp = new Empleado(codigo, nombres, apellidos, cargo, direccion, correo, numTelf);
+        NodoEmpleadoLista nuevoNodo = new NodoEmpleadoLista(emp);
         
-        
-        ListaDEnlazada nuevaLista = new ListaDEnlazada(emp);
+        ListaDEnlazada nuevaLista = new ListaDEnlazada(nuevoNodo);
         
         String codigo2 = "VV-0002";
         
@@ -127,12 +127,12 @@ public class ProyectoEstructurasDeDatos {
         
         Empleado emp5 = new Empleado(codigo5, nombres, apellidos, cargo, direccion, correo, numTelf);
         
-        nuevaLista.insertarAlInicio(nuevaLista, emp2);
-        nuevaLista.insertarOrdenado(nuevaLista, emp3);
-        nuevaLista.insertarOrdenado(nuevaLista, emp4);
-        nuevaLista.insertarOrdenado(nuevaLista, emp5);
+        nuevaLista.insertarOrdenado(emp2);
+        nuevaLista.insertarOrdenado(emp3);
+        nuevaLista.insertarOrdenado(emp4);
+        nuevaLista.insertarOrdenado(emp5);
         
-        nuevaLista.mostrar(nuevaLista);
+        nuevaLista.mostrar();
         
         
     }

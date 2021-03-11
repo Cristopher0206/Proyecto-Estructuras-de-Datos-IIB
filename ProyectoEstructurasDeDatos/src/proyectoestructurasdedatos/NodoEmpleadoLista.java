@@ -14,16 +14,14 @@ public class NodoEmpleadoLista {
     private NodoEmpleadoLista adelante;
     private NodoEmpleadoLista atras;
     
-    public NodoEmpleadoLista(Empleado empleado){
+    public void crearNodo(Empleado empleado){
         this.info = empleado;
         this.adelante = null;
         this.atras = null;
     }
     
-    public NodoEmpleadoLista(Empleado empleado, NodoEmpleadoLista adelante, NodoEmpleadoLista atras){
-        this.info = empleado;
-        this.adelante = adelante;
-        this.atras = atras;
+    public NodoEmpleadoLista(){
+        
     }
 
     public Empleado getInfo() {
