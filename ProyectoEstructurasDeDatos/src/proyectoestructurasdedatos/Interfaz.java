@@ -75,7 +75,7 @@ public class Interfaz extends javax.swing.JFrame {
                 
                 if (nuevoEmpleado.getCargo().equals("Vendedor")){
                     
-                    tabla.insertar(nuevoEmpleado.getCodigo());
+                    tabla.inicializar(nuevoEmpleado.getCodigo(),nuevoEmpleado.getUltimaSucursal());
                 }
             }
         }catch (Exception e){
@@ -499,11 +499,25 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void btnRotarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRotarActionPerformed
         // TODO add your handling code here:
-        
         txaAntes.setText(tabla.mostrarEstructura());
         
         
-        TablaHashEnlazadaEmpleados tablaAuxiliar = new TablaHashEnlazadaEmpleados();
+        try{
+            FileReader fr = new FileReader("registroEmpleados1.txt");
+            BufferedReader br = new BufferedReader(fr);
+            
+            FileWriter fw = new FileWriter("registroEmpleados1.txt");
+            PrintWriter pw = new PrintWriter(fw);
+            
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        
+        
+        
+        
         
         /*
         for(int i = 0; i < 4; i++){
