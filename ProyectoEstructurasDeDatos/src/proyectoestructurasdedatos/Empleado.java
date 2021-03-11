@@ -133,6 +133,7 @@ public class Empleado {
     public String toString() {
         return "Empleado: "+nombres+" "+apellidos+"\n"+
                "Código: "+codigo+"\n"+
+               "Cargo: "+cargo+"\n"+
                "Dirección: "+direccion+"\n"+
                "Correo: "+correo+"\n"+
                "Número de teléfono: "+numTelf+"\n";

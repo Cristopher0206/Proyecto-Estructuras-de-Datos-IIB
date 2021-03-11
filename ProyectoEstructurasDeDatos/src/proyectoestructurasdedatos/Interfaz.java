@@ -21,6 +21,7 @@ public class Interfaz extends javax.swing.JFrame {
     Empleado empleado = new Empleado();
     NodoEmpleadoLista nuevoNodo = new NodoEmpleadoLista();
     ListaDEnlazada lista = new ListaDEnlazada();
+    TablaHashEnlazadaEmpleados tabla = new TablaHashEnlazadaEmpleados();
     /*
     String sucursal = "";
     
@@ -37,6 +38,9 @@ public class Interfaz extends javax.swing.JFrame {
      */
     public Interfaz() {
         initComponents();
+        
+        
+        
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
@@ -47,26 +51,33 @@ public class Interfaz extends javax.swing.JFrame {
             String linea;
             while((linea = br.readLine()) != null){
                 StringTokenizer tokens = new StringTokenizer(linea, ",");
-                String dato = tokens.nextToken();               
-                empleado.setCodigo(dato);
+                String dato = tokens.nextToken();
+                Empleado nuevoEmpleado = new Empleado();
+                nuevoEmpleado.setCodigo(dato);
                 dato = tokens.nextToken();
-                empleado.setNombres(dato);
+                nuevoEmpleado.setNombres(dato);
                 dato = tokens.nextToken();
-                empleado.setApellidos(dato);
+                nuevoEmpleado.setApellidos(dato);
                 dato = tokens.nextToken();
-                empleado.setCargo(dato);
+                nuevoEmpleado.setCargo(dato);
                 dato = tokens.nextToken();
-                empleado.setDireccion(dato);
+                nuevoEmpleado.setDireccion(dato);
                 dato = tokens.nextToken();
-                empleado.setCorreo(dato);
+                nuevoEmpleado.setCorreo(dato);
                 dato = tokens.nextToken();
-                empleado.setNumTelf(dato);
+                nuevoEmpleado.setNumTelf(dato);
                 
-                lista.insertarOrdenado(empleado);
+                lista.insertarOrdenado(nuevoEmpleado);
+                
+                if (nuevoEmpleado.getCargo().equals("Vendedor")){
+                    tabla.insertar(nuevoEmpleado.getCodigo());
+                }
             }
         }catch (Exception e){
             e.printStackTrace();
         }
+        
+        
         
         /*
         tabla.insertar(1, "10-0001");
@@ -123,7 +134,6 @@ public class Interfaz extends javax.swing.JFrame {
         txaEmpleado = new javax.swing.JTextArea();
         cmbCargo = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        btnBotonPrueba = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -200,13 +210,6 @@ public class Interfaz extends javax.swing.JFrame {
 
         jLabel6.setText("Cargo");
 
-        btnBotonPrueba.setText("Mostrar empleados");
-        btnBotonPrueba.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBotonPruebaActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -242,9 +245,7 @@ public class Interfaz extends javax.swing.JFrame {
                                     .addComponent(txtApellidos)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(99, 99, 99)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBotonPrueba)
-                            .addComponent(btnInsertarEmpleado))))
+                        .addComponent(btnInsertarEmpleado)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
                 .addContainerGap())
@@ -282,8 +283,6 @@ public class Interfaz extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(txtNumTelf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnBotonPrueba)
-                        .addGap(27, 27, 27)
                         .addComponent(btnInsertarEmpleado)
                         .addGap(23, 23, 23))))
         );
@@ -495,9 +494,11 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void btnRotarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRotarActionPerformed
         // TODO add your handling code here:
-        /*
+        
         txaAntes.setText(tabla.mostrarEstructura());
         TablaHashEnlazadaEmpleados tablaAuxiliar = new TablaHashEnlazadaEmpleados();
+        
+        
         for(int i = 0; i < 4; i++){
             NodoEmpleado aux = tabla.getNodoEmpleado(i);
             int salida = 1;
@@ -555,7 +556,7 @@ public class Interfaz extends javax.swing.JFrame {
         }
         
         txaDespués.setText(tabla.mostrarEstructura());
-        */
+        
         
         
     }//GEN-LAST:event_btnRotarActionPerformed
@@ -645,12 +646,6 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtDireccionKeyPressed
 
-    private void btnBotonPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBotonPruebaActionPerformed
-        // TODO add your handling code here:
-        String text = lista.mostrar();
-        txaEmpleado.setText(text);
-    }//GEN-LAST:event_btnBotonPruebaActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -690,7 +685,6 @@ public class Interfaz extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBotonPrueba;
     private javax.swing.JButton btnInsertarEmpleado;
     private javax.swing.JButton btnMostrarEmpleados;
     private javax.swing.JButton btnRotar;

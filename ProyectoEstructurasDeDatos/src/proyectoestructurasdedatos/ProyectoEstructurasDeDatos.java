@@ -107,9 +107,11 @@ public class ProyectoEstructurasDeDatos {
         
         
         Empleado emp = new Empleado(codigo, nombres, apellidos, cargo, direccion, correo, numTelf);
-        NodoEmpleadoLista nuevoNodo = new NodoEmpleadoLista(emp);
+        //NodoEmpleadoLista nuevoNodo = new NodoEmpleadoLista();
+        //nuevoNodo.crearNodo(emp);
         
-        ListaDEnlazada nuevaLista = new ListaDEnlazada(nuevoNodo);
+        ListaDEnlazada nuevaLista = new ListaDEnlazada();
+        nuevaLista.insertarOrdenado(emp);
         
         String codigo2 = "VV-0002";
         
@@ -132,7 +134,12 @@ public class ProyectoEstructurasDeDatos {
         nuevaLista.insertarOrdenado(emp4);
         nuevaLista.insertarOrdenado(emp5);
         
-        nuevaLista.mostrar();
+        System.out.println(nuevaLista.mostrar());
+        
+        String prueba = "VD-0003";
+        int Iprueba = Integer.parseInt(prueba.substring(3, 7));
+        System.out.println(Iprueba);
+        
         
         
     }

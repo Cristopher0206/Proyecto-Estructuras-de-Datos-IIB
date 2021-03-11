@@ -27,11 +27,24 @@ public class TablaHashEnlazadaEmpleados {
             tabla[i] = null;
         }
     }
+    
+    public int aritmeticaModular(int clave){
+        return clave%this.tamaño;
+    }
 
-    public void insertar(int numSucursal, String codigo) {
+    public void insertar(String codigo) {
+        int numCodigo = Integer.parseInt(codigo.substring(3, 7));
+        int numSucursal = aritmeticaModular(numCodigo);
         NodoEmpleado nuevoNodo = new NodoEmpleado(codigo);
-        nuevoNodo.enlace = this.tabla[numSucursal - 1];
-        this.tabla[numSucursal - 1] = nuevoNodo;
+        nuevoNodo.enlace = this.tabla[numSucursal];
+        this.tabla[numSucursal] = nuevoNodo;
+    }
+    
+    public void insertar(int posicion, String codigo) {
+        int numSucursal = posicion;
+        NodoEmpleado nuevoNodo = new NodoEmpleado(codigo);
+        nuevoNodo.enlace = this.tabla[numSucursal];
+        this.tabla[numSucursal] = nuevoNodo;
     }
 
     public void eliminarEmpleado(int numSucursal, String valor) {
