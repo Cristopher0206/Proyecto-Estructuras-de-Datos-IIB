@@ -46,6 +46,13 @@ public class TablaHashEnlazadaEmpleados {
         nuevoNodo.enlace = this.tabla[numSucursal];
         this.tabla[numSucursal] = nuevoNodo;
     }
+    
+    public void inicializar(String codigo, String posicion) {
+        int numSucursal = Integer.parseInt(posicion);
+        NodoEmpleado nuevoNodo = new NodoEmpleado(codigo);
+        nuevoNodo.enlace = this.tabla[numSucursal];
+        this.tabla[numSucursal] = nuevoNodo;
+    }
 
     public void eliminarEmpleado(int numSucursal, String valor) {
         if (this.tabla[numSucursal - 1] != null) {

@@ -17,15 +17,17 @@ public class Empleado {
     private String nombres;
     private String apellidos;
     private String cargo;
+    private String ultimaSucursal;
     private String direccion;
     private String correo;
     private String numTelf;
     
-    public Empleado(String codigo, String nombres, String apellidos, String cargo, String direccion, String correo, String numTelf){
+    public Empleado(String codigo, String nombres, String apellidos, String cargo, String ultimaSucursal, String direccion, String correo, String numTelf){
         this.codigo = codigo;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.cargo = cargo;
+        this.ultimaSucursal = ultimaSucursal;
         this.direccion = direccion;
         this.correo = correo;
         this.numTelf = numTelf;
@@ -66,6 +68,15 @@ public class Empleado {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
+
+    public String getUltimaSucursal() {
+        return ultimaSucursal;
+    }
+
+    public void setUltimaSucursal(String ultimaSucursal) {
+        this.ultimaSucursal = ultimaSucursal;
+    }
+    
 
     public String getDireccion() {
         return direccion;

@@ -8,6 +8,8 @@ package proyectoestructurasdedatos;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -61,6 +63,8 @@ public class Interfaz extends javax.swing.JFrame {
                 dato = tokens.nextToken();
                 nuevoEmpleado.setCargo(dato);
                 dato = tokens.nextToken();
+                nuevoEmpleado.setUltimaSucursal(dato);
+                dato = tokens.nextToken();
                 nuevoEmpleado.setDireccion(dato);
                 dato = tokens.nextToken();
                 nuevoEmpleado.setCorreo(dato);
@@ -70,6 +74,7 @@ public class Interfaz extends javax.swing.JFrame {
                 lista.insertarOrdenado(nuevoEmpleado);
                 
                 if (nuevoEmpleado.getCargo().equals("Vendedor")){
+                    
                     tabla.insertar(nuevoEmpleado.getCodigo());
                 }
             }
@@ -496,21 +501,23 @@ public class Interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         txaAntes.setText(tabla.mostrarEstructura());
+        
+        
         TablaHashEnlazadaEmpleados tablaAuxiliar = new TablaHashEnlazadaEmpleados();
         
-        
+        /*
         for(int i = 0; i < 4; i++){
             NodoEmpleado aux = tabla.getNodoEmpleado(i);
             int salida = 1;
             do{
                 if(aux.enlace != null){
                     String codAux = aux.getCodigo();
-                    int posicion = i+1;
+                    int posicion = i;
                     tablaAuxiliar.insertar(posicion, codAux);
                     aux = aux.getEnlace();
                 }else{
                     String codAux = aux.getCodigo();
-                    int posicion = i+1;
+                    int posicion = i;
                     tablaAuxiliar.insertar(posicion, codAux);
                     aux = aux.getEnlace();
                     salida = 0;
@@ -526,12 +533,12 @@ public class Interfaz extends javax.swing.JFrame {
             while(salida == 1){
                 if(aux.enlace != null){
                     String codAux = aux.getCodigo();
-                    int posicion = i+2;
+                    int posicion = i+1;
                     tabla.insertar(posicion, codAux);
                     aux = aux.getEnlace();
                 }else{
                     String codAux = aux.getCodigo();
-                    int posicion = i+2;
+                    int posicion = i+1;
                     tabla.insertar(posicion, codAux);
                     aux = aux.getEnlace();
                     salida = 0;
@@ -556,7 +563,7 @@ public class Interfaz extends javax.swing.JFrame {
         }
         
         txaDespués.setText(tabla.mostrarEstructura());
-        
+        */
         
         
     }//GEN-LAST:event_btnRotarActionPerformed
